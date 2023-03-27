@@ -31,7 +31,6 @@ export const useItemsWithSocket = () => {
     socket.current.on('getItems', (...args) => {console.log('getItems:', args)});
   }, [updateItemsList, setItems]);
 
-  
   const updateItem = (id: string) => {
     socket.current!.emit('updateItem', id);
   };
