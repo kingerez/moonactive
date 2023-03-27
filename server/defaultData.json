@@ -1,0 +1,24 @@
+{
+  "items": {
+    "a": {
+      "name": "Rabbit",
+      "amount": 0,
+      "limit": 3
+    }, 
+    "b": {
+      "name": "Dog",
+      "amount": 0,
+      "limit": 4
+    }, 
+    "c": {
+      "name": "Labradoodle",
+      "amount": 0,
+      "limit": 2
+    }, 
+    "d": {
+      "name": "Wombat",
+      "amount": 0,
+      "limit": 5
+    }
+  }
+}
