@@ -11,6 +11,8 @@ const db = admin.database();
 const itemsRef = db.ref('items');
 
 const updateListeners = [];
+const itemUpdates = [];
+let isUpdating = false;
 
 itemsRef.on('child_changed', async snapshot => {
   const id = snapshot.key;
@@ -26,11 +28,28 @@ const getItems = async () => {
   return snapshot.val();
 };
 
-const updateItem = (id, newAmount) => {
-  const ref = itemsRef.child(id);
-  return ref.update({
-    amount: newAmount
-  });
+const updateItem = async (id) => {
+  itemUpdates.push({id});
+
+  if(!isUpdating) {
+    isUpdating = true;
+    while(itemUpdates.length > 0) {
+      console.log(itemUpdates);
+      const itemToUpdate = itemUpdates.shift();
+
+      const items = await getItems();
+      const itemFromDB = items[itemToUpdate.id];
+
+      if(itemFromDB.amount < itemFromDB.limit) {
+        const ref = itemsRef.child(itemToUpdate.id);
+        await ref.update({
+          amount: itemFromDB.amount + 1
+        });
+      }
+    }
+
+    isUpdating = false;
+  }
 };
 
 const resetItems = async () => {

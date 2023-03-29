@@ -22,11 +22,7 @@ const init =(server) => {
     });
 
     socket.on('updateItem', async (id) => {
-      const items = await database.getItems();
-      const item = items[id];
-      if(item.amount < item.limit) {
-        database.updateItem(id, item.amount + 1);
-      }
+      database.updateItem(id);
     });
 
     socket.on('resetData', () => {

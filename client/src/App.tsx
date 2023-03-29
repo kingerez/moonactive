@@ -44,7 +44,15 @@ function App() {
   const { items, updateItem, resetData } = useItemsWithSocket();
 
   const onClickBuy = (id: string) => {
-    updateItem(id);
+    let i = 0;
+    const interval = setInterval(() => {
+      console.log('updating'); // eslint-disable-line
+      updateItem(id);
+      i++;
+      if(i>10) {
+        clearInterval(interval);
+      }
+    }, 0);
   };
 
   const resetAllData = async () => {
