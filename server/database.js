@@ -34,7 +34,6 @@ const updateItem = async (id) => {
   if(!isUpdating) {
     isUpdating = true;
     while(itemUpdates.length > 0) {
-      console.log(itemUpdates);
       const itemToUpdate = itemUpdates.shift();
 
       const items = await getItems();

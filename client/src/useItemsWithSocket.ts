@@ -27,8 +27,6 @@ export const useItemsWithSocket = () => {
     socket.current.on('itemUpdated', (updatedItem: StoreItemObject, id: string) => {
       setItems(oldValue => oldValue.map(oldItem => oldItem.id === id ? {...updatedItem, id} : oldItem));
     });
-
-    socket.current.on('getItems', (...args) => {console.log('getItems:', args)});
   }, [updateItemsList, setItems]);
 
   const updateItem = (id: string) => {
